@@ -13,10 +13,13 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Application {
 
 	public static void main(String[] a) {
+		setLookAndFeel();
 		ApplicationWindow application = new ApplicationWindow();
 		application.validate();
 		application.show();
@@ -66,11 +69,12 @@ public class Application {
 			addKeyListener(new KeyListener() {
 				public void keyPressed(KeyEvent e) {
 					if ((e.getKeyCode() == KeyEvent.VK_F)
-							&& ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0)) {
+							&& ((e.getModifiers() & Toolkit.getDefaultToolkit()
+									.getMenuShortcutKeyMask()) != 0)) {
 						formattedTextArea.setText(formatText(inputTextArea
 								.getText()));
 					}
-					
+
 				}
 
 				public void keyReleased(KeyEvent arg0) {
@@ -91,4 +95,23 @@ public class Application {
 			}
 		}
 	}
+	
+	public static void setLookAndFeel() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
